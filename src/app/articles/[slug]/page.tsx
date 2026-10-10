@@ -42,7 +42,7 @@ export default async function ArticlePage({ params }: PageProps) {
   return (
     <article className="mx-auto grid max-w-3xl gap-8 px-5 py-12">
       <header className="grid gap-4">
-        <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-500">
+        <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
           <time dateTime={article.date}>{formatDate(article.date)}</time>
           <span aria-hidden="true">/</span>
           <span>{article.readingMinutes} 分钟阅读</span>

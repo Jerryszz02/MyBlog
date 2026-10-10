@@ -25,7 +25,7 @@
 | --- | --- |
 | 框架 | Next.js App Router |
 | 语言 | TypeScript |
-| 样式 | Tailwind CSS 通过全局样式和组件类名使用 |
+| 样式 | 首页 CSS Module、共享全局变量与 Tailwind 阅读页面 |
 | 内容 | 本地 MDX 文件加 frontmatter |
 | 内容解析 | `gray-matter` 解析 frontmatter，`reading-time` 计算阅读时间 |
 | MDX 渲染 | 通过共享 MDX 展示组件渲染正文 |
@@ -34,6 +34,14 @@
 | 字体 | 当前未发现外部字体配置 |
 
 ## 数据和状态流
+
+### Signal Poster 首页
+
+`src/app/page.tsx` 仍为服务端组件，项目和已发表文章统一取自内容加载器。首页拟写选题是显式维护的公开选题清单，不读取草稿正文。`featuredOrder` 控制人工精选顺序。
+
+首页 CSS Module 与共享页头、页脚负责视觉。客户端仅承载动效设置和 Canvas；每帧使用局部变量与预计算几何数据，不触发 React 更新。SSR 提供静态线框与完整正文，减少动态效果、暂停、离屏及隐藏页面均可停止动画，卸载清理监听器和 RAF。
+
+本地截图使用 Next.js Image 提供尺寸与响应式加载，不引入动画库、字体服务、CMS 或追踪。
 
 1. 作者在 `content/articles` 或 `content/projects` 添加或修改 `.mdx` 文件。
 2. `src/lib/content.ts` 读取对应目录，把文件名转换为 slug。
@@ -47,7 +55,7 @@
 
 | 子系统 | 当前职责 | 维护注意 |
 | --- | --- | --- |
-| 站点配置 | 提供站点名、标题、描述、作者、URL、语言、导航和社交链接 | 上线前必须替换占位 URL 和作者信息 |
+| 站点配置 | 提供站点名、标题、描述、作者、URL、语言、导航和社交链接 | 上线前必须替换占位 URL；当前展示名 Jerryszz，GitHub 已配置 |
 | 内容加载 | 读取 MDX、解析 frontmatter、过滤草稿、排序、聚合标签 | 新增字段或内容类型应先扩展类型和统一读取逻辑 |
 | 页面路由 | 提供首页、文章、项目、标签、关于和 RSS | 页面不应绕过内容加载层直接读取文件 |
 | 共享组件 | 提供页头、页脚、主题切换、内容卡片、标签、MDX 容器 | 保持组件只处理展示，不嵌入业务数据来源 |
@@ -63,7 +71,6 @@
 | 内容是草稿 | 不进入公开列表、标签、RSS 和公开详情查询 |
 | frontmatter 字段缺失 | 标题回退到 slug，描述回退为空，日期回退到当前日期，标签回退为空数组 |
 | 站点 URL 未确认 | 当前为 `https://example.com`，上线前必须替换 |
-| 作者未确认 | 当前为 `待确认`，上线前必须替换 |
 
 ## 关键决策
 
@@ -96,13 +103,12 @@
 - 公开页面不会展示 `draft: true` 内容。
 - RSS 输出使用公开文章和站点配置。
 - `.gitignore` 能阻止依赖、构建产物和 secrets 被提交。
-- `npm run lint`、`npm run typecheck`、`npm run build` 通过。
+- `npm test`、`npm run lint`、`npm run typecheck`、`npm run build` 通过。
 
 ## 待确认
 
 | 项 | 影响 |
 | --- | --- |
 | 正式域名 | 上线前需要替换 `siteConfig.url` |
-| 作者和社交链接 | 影响首页、关于页、页脚、RSS 和 metadata |
 | 部署平台 | 影响构建命令、静态/服务端能力、环境配置和发布验收 |
 | 是否需要 sitemap | 当前仓库未发现 sitemap 路由或生成配置 |

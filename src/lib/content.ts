@@ -14,6 +14,12 @@ export type ContentItem = {
   tags: string[];
   draft: boolean;
   featured: boolean;
+  featuredOrder?: number;
+  status?: string;
+  category?: string;
+  cover?: string;
+  coverAlt?: string;
+  coverCaption?: string;
   repo?: string;
   demo?: string;
   body: string;
@@ -27,6 +33,12 @@ type RawFrontmatter = {
   tags?: unknown;
   draft?: unknown;
   featured?: unknown;
+  featuredOrder?: unknown;
+  status?: unknown;
+  category?: unknown;
+  cover?: unknown;
+  coverAlt?: unknown;
+  coverCaption?: unknown;
   repo?: unknown;
   demo?: unknown;
 };
@@ -78,11 +90,34 @@ function parseContentFile(type: ContentType, filePath: string): ContentItem {
     slug,
     title: typeof frontmatter.title === "string" ? frontmatter.title : slug,
     description:
-      typeof frontmatter.description === "string" ? frontmatter.description : "",
+      typeof frontmatter.description === "string"
+        ? frontmatter.description
+        : "",
     date: toDateString(frontmatter.date),
     tags: toStringList(frontmatter.tags),
     draft: frontmatter.draft === true,
     featured: frontmatter.featured === true,
+    featuredOrder:
+      typeof frontmatter.featuredOrder === "number" &&
+      Number.isFinite(frontmatter.featuredOrder)
+        ? frontmatter.featuredOrder
+        : undefined,
+    status:
+      typeof frontmatter.status === "string" ? frontmatter.status : undefined,
+    category:
+      typeof frontmatter.category === "string"
+        ? frontmatter.category
+        : undefined,
+    cover:
+      typeof frontmatter.cover === "string" ? frontmatter.cover : undefined,
+    coverAlt:
+      typeof frontmatter.coverAlt === "string"
+        ? frontmatter.coverAlt
+        : undefined,
+    coverCaption:
+      typeof frontmatter.coverCaption === "string"
+        ? frontmatter.coverCaption
+        : undefined,
     repo: typeof frontmatter.repo === "string" ? frontmatter.repo : undefined,
     demo: typeof frontmatter.demo === "string" ? frontmatter.demo : undefined,
     body: content,
@@ -112,11 +147,27 @@ export function getAllProjects(includeDrafts = false) {
 }
 
 export function getFeaturedArticles(limit = 3) {
-  return getAllArticles().filter((item) => item.featured).slice(0, limit);
+  return getAllArticles()
+    .filter((item) => item.featured)
+    .slice(0, limit);
 }
 
 export function getFeaturedProjects(limit = 3) {
-  return getAllProjects().filter((item) => item.featured).slice(0, limit);
+  return getAllProjects()
+    .filter((item) => item.featured)
+    .sort(compareProjects)
+    .slice(0, limit);
+}
+
+export function compareProjects(a: ContentItem, b: ContentItem) {
+  if (a.featured !== b.featured) return a.featured ? -1 : 1;
+  if (a.featured && b.featured) {
+    const order =
+      (a.featuredOrder ?? Number.MAX_SAFE_INTEGER) -
+      (b.featuredOrder ?? Number.MAX_SAFE_INTEGER);
+    if (order !== 0) return order;
+  }
+  return new Date(b.date).getTime() - new Date(a.date).getTime();
 }
 
 export function getContentBySlug(type: ContentType, slug: string) {

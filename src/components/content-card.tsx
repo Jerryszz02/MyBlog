@@ -11,8 +11,9 @@ export function ContentCard({ item }: { item: ContentItem }) {
       : `/projects/${item.slug}`;
 
   return (
-    <article className="group grid gap-3 rounded-lg border border-zinc-200 bg-white p-5 transition hover:border-emerald-300 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-emerald-700">
-      <div className="flex flex-wrap items-center gap-2 text-xs text-zinc-500 dark:text-zinc-500">
+    <article className="group grid gap-3 rounded-lg border border-zinc-200 bg-white p-5 transition hover:border-orange-300 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-orange-700">
+      <div className="flex flex-wrap items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+        {item.status ? <span className="text-[var(--link)]">{item.status}</span> : null}
         <time dateTime={item.date}>{formatDate(item.date)}</time>
         <span aria-hidden="true">/</span>
         <span>{item.readingMinutes} 分钟阅读</span>
@@ -23,7 +24,7 @@ export function ContentCard({ item }: { item: ContentItem }) {
             {item.title}
             <ArrowUpRight
               aria-hidden="true"
-              className="size-4 text-zinc-400 transition group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
+              className="size-4 text-zinc-400 transition group-hover:text-orange-700 dark:group-hover:text-orange-300"
             />
           </Link>
         </h2>

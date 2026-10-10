@@ -2,14 +2,22 @@
 
 import { Laptop, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useSyncExternalStore } from "react";
 
-const themes = ["system", "light", "dark"] as const;
+const themes = ["light", "dark", "system"] as const;
+const subscribe = () => () => {};
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const currentTheme = themes.includes(theme as (typeof themes)[number])
-    ? (theme as (typeof themes)[number])
-    : "system";
+  const mounted = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  );
+  const currentTheme =
+    mounted && themes.includes(theme as (typeof themes)[number])
+      ? (theme as (typeof themes)[number])
+      : "light";
 
   const nextTheme = themes[(themes.indexOf(currentTheme) + 1) % themes.length];
   const Icon =
@@ -18,7 +26,7 @@ export function ThemeToggle() {
   return (
     <button
       aria-label="切换主题"
-      className="inline-flex size-9 items-center justify-center rounded-md border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:text-white"
+      className="theme-toggle"
       onClick={() => setTheme(nextTheme)}
       title={`当前：${currentTheme}，点击切换到 ${nextTheme}`}
       type="button"

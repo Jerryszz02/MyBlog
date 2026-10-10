@@ -7,7 +7,8 @@
     "build": "NEXT_TELEMETRY_DISABLED=1 NEXT_TEST_WASM=1 next build --webpack",
     "start": "NEXT_TELEMETRY_DISABLED=1 next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

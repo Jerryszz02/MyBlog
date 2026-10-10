@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <section className="mx-auto grid max-w-3xl gap-5 px-5 py-24">
-      <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+      <p className="text-sm font-semibold text-[var(--link)]">
         404
       </p>
       <h1 className="text-3xl font-semibold tracking-normal text-zinc-950 dark:text-white">

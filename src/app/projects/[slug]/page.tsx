@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Code2, ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 import { MdxContent } from "@/components/mdx-content";
@@ -43,8 +44,11 @@ export default async function ProjectPage({ params }: PageProps) {
   return (
     <article className="mx-auto grid max-w-3xl gap-8 px-5 py-12">
       <header className="grid gap-4">
-        <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-500">
+        <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
           <time dateTime={project.date}>{formatDate(project.date)}</time>
+          {project.status ? (
+            <span className="text-[var(--link)]">{project.status}</span>
+          ) : null}
           {project.featured ? (
             <>
               <span aria-hidden="true">/</span>
@@ -83,11 +87,29 @@ export default async function ProjectPage({ params }: PageProps) {
               target="_blank"
             >
               <ExternalLink aria-hidden="true" className="size-4" />
-              Demo
+              体验项目
             </a>
           ) : null}
         </div>
       </header>
+      {project.cover ? (
+        <figure className="grid gap-3">
+          <Image
+            className="h-auto w-full border border-[var(--line)]"
+            loading="eager"
+            src={project.cover}
+            alt={project.coverAlt ?? project.title}
+            width={project.slug === "personal-agent" ? 1440 : 1600}
+            height={1000}
+            sizes="(max-width: 768px) 94vw, 768px"
+          />
+          {project.coverCaption ? (
+            <figcaption className="text-sm text-[var(--muted)]">
+              {project.coverCaption}
+            </figcaption>
+          ) : null}
+        </figure>
+      ) : null}
       <MdxContent source={project.body} />
     </article>
   );

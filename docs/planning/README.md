@@ -8,24 +8,25 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 更新时间 | 2026-07-07 |
+| 更新时间 | 2026-10-11 |
 | 项目根目录 | `/Users/jerryszz/Desktop/Projects/MyBlog` |
 | 工作模式 | 现有项目梳理模式：根据已实现的 Next.js 项目更新规划文档 |
-| 当前项目状态 | 已实现本地 MDX 驱动的个人技术作品集博客，当前目录尚未初始化 Git 仓库 |
+| 当前项目状态 | 已实现本地 MDX 驱动的个人作品集博客；采用已确认的 Signal Poster 首页，Git 仓库已建立 |
 
 ## 已检查的关键项目证据
 
 | 证据 | 结论 |
 | --- | --- |
-| `package.json` | 项目名为 `myblog`，使用 Next.js、React、TypeScript、Tailwind、MDX、RSS、主题和代码高亮相关依赖；包含 `dev`、`build`、`lint`、`typecheck` 脚本 |
+| `package.json` | 使用 Next.js、React、TypeScript、Tailwind、MDX、RSS 和主题相关依赖；包含 `dev`、`build`、`lint`、`typecheck`、`test` 脚本 |
 | `.gitignore` | 已忽略 `node_modules`、`.next`、构建产物、环境变量、日志和系统文件 |
-| `src/config/site.ts` | 站点名、标题、描述、作者、URL、语言、导航和社交链接集中配置；作者、正式 URL 和社交链接仍为待确认 |
-| `src/lib/content.ts` | 统一从 `content/articles` 和 `content/projects` 读取 MDX，解析 frontmatter，过滤草稿，按日期排序，聚合标签 |
-| `src/app/page.tsx` | 首页展示站点定位、最新文章、精选项目和常用标签 |
+| `src/config/site.ts` | 展示名为 Jerryszz，GitHub 入口已配置；正式域名仍待确认 |
+| `src/lib/content.ts` | 统一读取 MDX、过滤草稿、聚合标签；文章按日期排序，精选项目支持 `featuredOrder` |
+| `src/app/page.tsx` | 首页突出 Personal Agent，展示精选作品、开发手记或拟写选题、下一步和关于 |
 | `src/app/layout.tsx` | 全局 metadata、RSS alternate、主题 Provider、页头和页脚集中在根布局 |
 | `src/app/rss.xml/route.ts` | 基于公开文章生成 RSS XML，使用 `siteConfig.url` 和 `siteConfig.author` |
 | `src/app/articles/*`、`src/app/projects/*`、`src/app/tags/[tag]/page.tsx`、`src/app/about/page.tsx` | 已存在文章、项目、标签和关于页面路由 |
-| `content/articles/*.mdx`、`content/projects/*.mdx` | 已存在示例文章和项目内容，用于页面与 RSS 验证 |
+| `content/articles/*.mdx`、`content/projects/*.mdx` | 八个真实项目条目；原示例内容保留为草稿，尚无公开文章 |
+| `DESIGN.md`、`src/components/home/*` | 已选视觉、响应式布局、可暂停 Canvas 装置和服务端静态保底 |
 
 ## 项目是什么
 
@@ -50,6 +51,7 @@ MyBlog 是一个个人技术作品集博客。它用本地 MDX 文件保存文�
 | `docs/planning/prd.md` | 定义当前已实现和应保持的用户可见行为 |
 | `docs/planning/technical-design.md` | 说明当前实现结构、数据流、边界和维护约束 |
 | `docs/planning/test-plan.md` | 定义自动检查和人工验收方式 |
+| `DESIGN.md` | 第三版 Signal Poster 的已确认设计规范与内容约束 |
 
 ## 已跳过目录文档
 
@@ -67,7 +69,7 @@ MyBlog 是一个个人技术作品集博客。它用本地 MDX 文件保存文�
 
 ## 后续开发入口
 
-1. 从 `src/config/site.ts` 确认作者、域名和社交链接。
+1. 上线前在 `src/config/site.ts` 配置正式域名；展示名与 GitHub 已有明确值。
 2. 在 `content/articles` 和 `content/projects` 维护真实 MDX 内容。
 3. 修改产品行为前先更新 `docs/planning/prd.md`。
 4. 修改内容加载、路由、RSS、主题或 SEO 前先更新 `docs/planning/technical-design.md`。
@@ -77,16 +79,14 @@ MyBlog 是一个个人技术作品集博客。它用本地 MDX 文件保存文�
 
 | 项 | 影响 |
 | --- | --- |
-| 作者真实展示名 | 影响首页、关于页、metadata 和 RSS 作者字段 |
 | 正式站点域名 | 影响 `metadataBase`、Open Graph、RSS 链接和 canonical 类信息 |
-| 社交链接 | 影响首页、关于页和页脚可点击出口 |
-| 首批真实文章和项目内容 | 当前仓库可见内容包含示例性质条目，是否作为正式内容需要用户确认 |
+| 首篇正式文章 | 拟写选题有明确标识；完成后作为非草稿 MDX 进入文章列表和 RSS |
 | 部署平台 | 当前未发现部署配置，生产发布方式、环境变量和上线检查均待确认 |
 
 ## 人工检查建议
 
 | 建议 | 原因 |
 | --- | --- |
-| 用户确认 `src/config/site.ts` 中的 `author`、`url` 和 `social` | 这些字段目前是占位或空值，无法从仓库证据推断真实身份和域名 |
-| 用户确认 `content/` 下现有 MDX 是否可公开发布 | 仓库只能证明文件存在，不能证明内容是否已获得最终发布确认 |
+| 上线前确认 `src/config/site.ts` 中的 `url` | 目前为 `https://example.com`，不可作为正式域名 |
+| 新增文章时明确 `draft` 状态 | 拟写选题与原示例不是已发表文章 |
 | 用户补充部署目标或保持本地项目定位 | 当前没有 Vercel、GitHub Pages 或其他部署配置，无法确定发布流程 |
