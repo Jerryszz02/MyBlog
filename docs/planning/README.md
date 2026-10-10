@@ -27,6 +27,7 @@
 | `src/app/articles/*`、`src/app/projects/*`、`src/app/tags/[tag]/page.tsx`、`src/app/about/page.tsx` | 已存在文章、项目、标签和关于页面路由 |
 | `content/articles/*.mdx`、`content/projects/*.mdx` | 八个真实项目条目；原示例内容保留为草稿，尚无公开文章 |
 | `DESIGN.md`、`src/components/home/*` | 已选视觉、响应式布局、可暂停 Canvas 装置和服务端静态保底 |
+| GitHub PR #2 的 Vercel 检查（2026-10-11 核验） | 已存在 Vercel Git 预览集成，构建成功；预览保留 Vercel 登录保护，认证读取首页返回 200 |
 
 ## 项目是什么
 
@@ -63,7 +64,7 @@ MyBlog 是一个个人技术作品集博客。它用本地 MDX 文件保存文�
 | `api-design.md` | 仓库没有内容管理 API 或稳定客户端服务契约；`/rss.xml` 作为 RSS 页面能力记录在技术设计中 |
 | `database-design.md` | 当前不使用数据库、迁移、索引或持久化 schema |
 | `security-privacy.md` | 当前没有登录、凭据、支付、用户私密数据或第三方追踪；隐私约束合并到 PRD 与技术设计 |
-| `release-plan.md` | 未发现部署平台、feature flag、迁移、回滚或发布流程证据 |
+| `release-plan.md` | 已确认 Vercel 预览；正式域名、生产发布与回滚流程仍需确认 |
 | `operations-runbook.md` | 未发现长期运行任务、队列、外部集成或生产运维流程证据 |
 | `decision-log.md` | 关键取舍较少，已合并到技术设计 |
 
@@ -81,7 +82,7 @@ MyBlog 是一个个人技术作品集博客。它用本地 MDX 文件保存文�
 | --- | --- |
 | 正式站点域名 | 影响 `metadataBase`、Open Graph、RSS 链接和 canonical 类信息 |
 | 首篇正式文章 | 拟写选题有明确标识；完成后作为非草稿 MDX 进入文章列表和 RSS |
-| 部署平台 | 当前未发现部署配置，生产发布方式、环境变量和上线检查均待确认 |
+| 生产发布流程 | 已有 Vercel 预览集成；正式域名、生产发布方式和上线检查仍待确认 |
 
 ## 人工检查建议
 
@@ -89,4 +90,4 @@ MyBlog 是一个个人技术作品集博客。它用本地 MDX 文件保存文�
 | --- | --- |
 | 上线前确认 `src/config/site.ts` 中的 `url` | 目前为 `https://example.com`，不可作为正式域名 |
 | 新增文章时明确 `draft` 状态 | 拟写选题与原示例不是已发表文章 |
-| 用户补充部署目标或保持本地项目定位 | 当前没有 Vercel、GitHub Pages 或其他部署配置，无法确定发布流程 |
+| 正式发布时核对生产项目、域名与提交 | Vercel 预览就绪不代表生产发布已完成 |
