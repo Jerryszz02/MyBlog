@@ -19,7 +19,7 @@
 | --- | --- |
 | `package.json` | 使用 Next.js、React、TypeScript、Tailwind、MDX、RSS 和主题相关依赖；包含 `dev`、`build`、`lint`、`typecheck`、`test` 脚本 |
 | `.gitignore` | 已忽略 `node_modules`、`.next`、构建产物、环境变量、日志和系统文件 |
-| `src/config/site.ts` | 展示名为 Jerryszz，GitHub 入口已配置；正式域名仍待确认 |
+| `src/config/site.ts` | 展示名为 Jerryszz，GitHub 入口已配置；站点 URL 使用已核验的生产域名 `https://myblog-lac-tau-25.vercel.app` |
 | `src/lib/content.ts` | 统一读取 MDX、过滤草稿、聚合标签；文章按日期排序，精选项目支持 `featuredOrder` |
 | `src/app/page.tsx` | 首页突出 Personal Agent，展示精选作品、开发手记或拟写选题、下一步和关于 |
 | `src/app/layout.tsx` | 全局 metadata、RSS alternate、主题 Provider、页头和页脚集中在根布局 |
@@ -64,13 +64,13 @@ MyBlog 是一个个人技术作品集博客。它用本地 MDX 文件保存文�
 | `api-design.md` | 仓库没有内容管理 API 或稳定客户端服务契约；`/rss.xml` 作为 RSS 页面能力记录在技术设计中 |
 | `database-design.md` | 当前不使用数据库、迁移、索引或持久化 schema |
 | `security-privacy.md` | 当前没有登录、凭据、支付、用户私密数据或第三方追踪；隐私约束合并到 PRD 与技术设计 |
-| `release-plan.md` | 已确认 Vercel 预览；正式域名、生产发布与回滚流程仍需确认 |
+| `release-plan.md` | 当前沿用 Vercel Git 集成；合并后核对生产提交、域名和页面，尚未定义自定义发布或回滚流程 |
 | `operations-runbook.md` | 未发现长期运行任务、队列、外部集成或生产运维流程证据 |
 | `decision-log.md` | 关键取舍较少，已合并到技术设计 |
 
 ## 后续开发入口
 
-1. 上线前在 `src/config/site.ts` 配置正式域名；展示名与 GitHub 已有明确值。
+1. 站点域名变化时同步更新 `src/config/site.ts`，复查 HTML 中的 RSS 入口与 RSS 自身链接。
 2. 在 `content/articles` 和 `content/projects` 维护真实 MDX 内容。
 3. 修改产品行为前先更新 `docs/planning/prd.md`。
 4. 修改内容加载、路由、RSS、主题或 SEO 前先更新 `docs/planning/technical-design.md`。
@@ -80,14 +80,14 @@ MyBlog 是一个个人技术作品集博客。它用本地 MDX 文件保存文�
 
 | 项 | 影响 |
 | --- | --- |
-| 正式站点域名 | 影响 `metadataBase`、Open Graph、RSS 链接和 canonical 类信息 |
+| 自定义域名（如后续启用） | 当前使用 Vercel 生产域名；更换后需同步 metadata 和 RSS |
 | 首篇正式文章 | 拟写选题有明确标识；完成后作为非草稿 MDX 进入文章列表和 RSS |
-| 生产发布流程 | 已有 Vercel 预览集成；正式域名、生产发布方式和上线检查仍待确认 |
+| 自定义发布与回滚流程 | 当前沿用 Vercel Git 集成；额外发布流程尚未配置 |
 
 ## 人工检查建议
 
 | 建议 | 原因 |
 | --- | --- |
-| 上线前确认 `src/config/site.ts` 中的 `url` | 目前为 `https://example.com`，不可作为正式域名 |
+| 发布后检查 `src/config/site.ts` 对应域名的 RSS 链接 | 首页订阅入口、RSS 自身地址与条目地址应指向同一站点 |
 | 新增文章时明确 `draft` 状态 | 拟写选题与原示例不是已发表文章 |
 | 正式发布时核对生产项目、域名与提交 | Vercel 预览就绪不代表生产发布已完成 |

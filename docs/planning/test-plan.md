@@ -6,7 +6,7 @@
 
 ## 适用范围
 
-适用于 `/Users/jerryszz/Desktop/Projects/MyBlog` 中使用 Next.js、TypeScript、Tailwind CSS、本地 MDX 和 RSS 的个人技术作品集博客。2026-10-11 已核验 Vercel Git 预览集成；正式域名与生产发布检查仍为 `待确认`。
+适用于 `/Users/jerryszz/Desktop/Projects/MyBlog` 中使用 Next.js、TypeScript、Tailwind CSS、本地 MDX 和 RSS 的个人技术作品集博客。2026-10-11 已核验 Vercel Git 集成与生产域名 `https://myblog-lac-tau-25.vercel.app`。
 
 ## Plan 或项目证据
 
@@ -38,6 +38,7 @@
 | 访问 `/about` | 展示当前关注方向和 GitHub 入口，无虚构身份或邮箱 |
 | 访问 `/tags/[tag]` | 展示该标签下的文章和项目 |
 | 访问 `/rss.xml` | 返回包含非草稿文章的 RSS XML |
+| HTML RSS 入口和订阅链接 | 首页 alternate、RSS channel 和 self 链接指向 `siteConfig.url`，不得残留 `example.com` |
 | 切换主题 | light、dark、system 可切换，刷新后保持预期状态 |
 | 移动端浏览 | 文本、卡片、导航和按钮不重叠、不溢出 |
 | 更多项目与拟写选题 | 原生 details 可展开；选题标为尚未发表，提纲不是草稿正文 |
@@ -61,7 +62,7 @@
 - 当前不要求 E2E 自动化测试。
 - 当前不要求性能压测。
 - 当前不要求视觉回归测试。
-- 当前不定义生产发布检查；Vercel 预览需要核对构建状态、提交与认证访问结果。
+- 当前不新增自定义部署流水线；Vercel 预览与生产部署均需核对构建状态、提交和实际页面。生产域名应可公开访问。
 
 ## 验收标准
 
@@ -77,6 +78,6 @@
 
 | 项 | 影响 |
 | --- | --- |
-| 正式发布目标 | 已验证本地生产构建与受保护的 Vercel 预览；正式上线前需要确认域名和生产项目配置 |
+| 自定义域名或发布流程 | 当前使用 Vercel 生产域名与 Git 集成；变更时补充对应验收 |
 | 真实内容量 | 内容增加后需要复查列表、标签页、RSS 和移动端可读性 |
 | 是否需要自动化 E2E | 当前仓库未提供 Playwright、Cypress 或其他 E2E 配置 |
