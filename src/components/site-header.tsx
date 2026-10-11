@@ -4,26 +4,37 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-zinc-200 bg-zinc-50/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
+    <header className="site-header">
+      <a href="#main-content" className="skip-link">
+        跳到正文
+      </a>
+      <div className="site-header-inner">
         <Link
-          className="text-sm font-semibold tracking-normal text-zinc-950 dark:text-white"
+          className="site-brand"
           href="/"
+          aria-label={`${siteConfig.name} 首页`}
         >
-          {siteConfig.name}
+          <span className="site-brand-mark" aria-hidden="true">
+            &gt;_
+          </span>
+          {siteConfig.name.toUpperCase()}
         </Link>
-        <div className="flex items-center gap-2">
-          <nav aria-label="主导航" className="flex items-center gap-1">
-            {siteConfig.nav.map((item) => (
-              <Link
-                className="rounded-md px-3 py-2 text-sm font-medium text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
-                href={item.href}
-                key={item.href}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+        <nav aria-label="主导航" className="site-nav">
+          {siteConfig.nav.map((item) => (
+            <Link href={item.href} key={item.href}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="site-header-actions">
+          <a
+            className="site-github"
+            href={siteConfig.social.github}
+            target="_blank"
+            rel="noreferrer"
+          >
+            GITHUB ↗
+          </a>
           <ThemeToggle />
         </div>
       </div>

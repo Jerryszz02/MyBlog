@@ -3,18 +3,18 @@ import { siteConfig } from "@/config/site";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-zinc-200 dark:border-zinc-800">
-      <div className="mx-auto grid max-w-5xl gap-4 px-5 py-8 text-sm text-zinc-500 dark:text-zinc-500 md:flex md:items-center md:justify-between">
+    <footer className="site-footer">
+      <div className="site-footer-inner">
         <p>
-          © {new Date().getFullYear()} {siteConfig.name}. Built with Next.js.
+          © {new Date().getFullYear()} {siteConfig.name} · 作品与手记
         </p>
-        <div className="flex flex-wrap gap-3">
-          <Link className="hover:text-zinc-950 dark:hover:text-white" href="/rss.xml">
-            RSS
-          </Link>
-          <Link className="hover:text-zinc-950 dark:hover:text-white" href="/about">
-            联系
-          </Link>
+        <div className="site-footer-links">
+          <Link href="/rss.xml">RSS</Link>
+          <Link href="/projects">作品</Link>
+          <Link href="/about">关于</Link>
+          <a href={siteConfig.social.github} target="_blank" rel="noreferrer">
+            GitHub ↗
+          </a>
         </div>
       </div>
     </footer>

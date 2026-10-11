@@ -37,7 +37,7 @@ export default async function TagPage({ params }: PageProps) {
   return (
     <section className="mx-auto grid max-w-5xl gap-8 px-5 py-12">
       <div className="grid gap-3">
-        <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+        <p className="text-sm font-semibold text-[var(--link)]">
           Tag
         </p>
         <h1 className="text-3xl font-semibold tracking-normal text-zinc-950 dark:text-white">

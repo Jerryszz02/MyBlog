@@ -1,17 +1,17 @@
 export const siteConfig = {
-  name: "MyBlog",
-  title: "MyBlog | 个人技术作品集",
-  description: "记录技术实践、项目复盘和长期学习的个人博客。",
-  author: "待确认",
-  url: "https://example.com",
+  name: "Jerryszz",
+  title: "Jerryszz | 作品与手记",
+  description: "正在构建自己的 Personal Agent，也记录应用、游戏和 AI 工具的开发过程。",
+  author: "Jerryszz",
+  url: "https://myblog-lac-tau-25.vercel.app",
   locale: "zh-CN",
   nav: [
-    { href: "/articles", label: "文章" },
-    { href: "/projects", label: "项目" },
+    { href: "/projects", label: "作品" },
+    { href: "/articles", label: "手记" },
     { href: "/about", label: "关于" },
   ],
   social: {
-    github: "",
+    github: "https://github.com/Jerryszz02",
     email: "",
   },
 };

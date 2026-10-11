@@ -10,15 +10,15 @@ export default function AboutPage() {
   return (
     <section className="mx-auto grid max-w-3xl gap-8 px-5 py-12">
       <div className="grid gap-3">
-        <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+        <p className="text-sm font-semibold text-[var(--link)]">
           About
         </p>
         <h1 className="text-3xl font-semibold tracking-normal text-zinc-950 dark:text-white">
           关于 {siteConfig.name}
         </h1>
         <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-          这里是个人技术作品集博客，用来记录工程实践、项目复盘、工具使用和长期学习。
-          作者展示名、正式联系方式和社交链接仍为待确认项。
+          我正在构建自己的 Personal Agent，也做应用、游戏和信息工具。
+          这里收集我的作品，以及它们背后的选择、问题和开发过程。
         </p>
       </div>
 
@@ -28,9 +28,9 @@ export default function AboutPage() {
             关注方向
           </h2>
           <ul className="mt-4 grid gap-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            <li>前端工程、Next.js、TypeScript</li>
-            <li>AI 工具链和自动化工作流</li>
-            <li>产品原型、项目复盘和可维护性设计</li>
+            <li>Personal Agent：对话、记忆与可靠执行</li>
+            <li>个人应用、独立游戏与信息工具</li>
+            <li>把具体的开发经验整理成手记</li>
           </ul>
         </section>
         <section className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
@@ -39,17 +39,34 @@ export default function AboutPage() {
           </h2>
           <dl className="mt-4 grid gap-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
             <div>
-              <dt className="font-medium text-zinc-950 dark:text-white">作者</dt>
+              <dt className="font-medium text-zinc-950 dark:text-white">
+                作者
+              </dt>
               <dd>{siteConfig.author}</dd>
             </div>
             <div>
-              <dt className="font-medium text-zinc-950 dark:text-white">GitHub</dt>
-              <dd>{siteConfig.social.github || "待确认"}</dd>
+              <dt className="font-medium text-zinc-950 dark:text-white">
+                GitHub
+              </dt>
+              <dd>
+                <a
+                  className="break-all text-[var(--link)] underline underline-offset-4"
+                  href={siteConfig.social.github}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {siteConfig.social.github}
+                </a>
+              </dd>
             </div>
-            <div>
-              <dt className="font-medium text-zinc-950 dark:text-white">Email</dt>
-              <dd>{siteConfig.social.email || "待确认"}</dd>
-            </div>
+            {siteConfig.social.email ? (
+              <div>
+                <dt className="font-medium text-zinc-950 dark:text-white">
+                  Email
+                </dt>
+                <dd>{siteConfig.social.email}</dd>
+              </div>
+            ) : null}
           </dl>
         </section>
       </div>
