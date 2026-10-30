@@ -6,12 +6,11 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <p>
-          © {new Date().getFullYear()} {siteConfig.name} · 作品与手记
+          © {new Date().getFullYear()} {siteConfig.name}
         </p>
         <div className="site-footer-links">
           <Link href="/rss.xml">RSS</Link>
-          <Link href="/projects">作品</Link>
-          <Link href="/about">关于</Link>
+          <Link href="/articles">手记</Link>
           <a href={siteConfig.social.github} target="_blank" rel="noreferrer">
             GitHub ↗
           </a>

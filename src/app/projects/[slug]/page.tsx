@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Code2, ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 import { MdxContent } from "@/components/mdx-content";
-import { TagPill } from "@/components/tag-pill";
 import { getAllProjects, getContentBySlug } from "@/lib/content";
-import { formatDate } from "@/lib/format";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -42,55 +41,54 @@ export default async function ProjectPage({ params }: PageProps) {
   }
 
   return (
-    <article className="mx-auto grid max-w-3xl gap-8 px-5 py-12">
-      <header className="grid gap-4">
-        <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
-          <time dateTime={project.date}>{formatDate(project.date)}</time>
-          {project.status ? (
-            <span className="text-[var(--link)]">{project.status}</span>
-          ) : null}
-          {project.featured ? (
-            <>
-              <span aria-hidden="true">/</span>
-              <span>精选项目</span>
-            </>
-          ) : null}
-        </div>
-        <h1 className="text-4xl font-semibold tracking-normal text-zinc-950 dark:text-white">
+    <article className="mx-auto grid max-w-3xl gap-10 px-5 py-16">
+      <header className="grid gap-5">
+        <h1 className="text-4xl font-semibold tracking-normal text-[var(--ink)]">
           {project.title}
         </h1>
-        <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+        <p className="text-lg leading-8 text-[var(--muted)]">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-2">
+        {project.status ? (
+          <p className="text-[var(--link)]">{project.status}</p>
+        ) : null}
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-[var(--muted)]">
           {project.tags.map((tag) => (
-            <TagPill key={tag} tag={tag} />
+            <Link
+              className="underline decoration-[var(--line)] underline-offset-4 hover:text-[var(--link)]"
+              href={`/tags/${encodeURIComponent(tag)}`}
+              key={tag}
+            >
+              {tag}
+            </Link>
           ))}
         </div>
-        <div className="flex flex-wrap gap-3">
-          {project.repo ? (
-            <a
-              className="inline-flex items-center gap-2 rounded-md border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950 dark:border-zinc-800 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:text-white"
-              href={project.repo}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <Code2 aria-hidden="true" className="size-4" />
-              代码
-            </a>
-          ) : null}
-          {project.demo ? (
-            <a
-              className="inline-flex items-center gap-2 rounded-md bg-zinc-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
-              href={project.demo}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <ExternalLink aria-hidden="true" className="size-4" />
-              体验项目
-            </a>
-          ) : null}
-        </div>
+        {project.repo || project.demo ? (
+          <div className="flex flex-wrap gap-3">
+            {project.repo ? (
+              <a
+                className="inline-flex items-center gap-2 border border-[var(--line)] px-4 py-3 font-medium text-[var(--ink)] transition hover:border-[var(--link)]"
+                href={project.repo}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Code2 aria-hidden="true" className="size-4" />
+                代码
+              </a>
+            ) : null}
+            {project.demo ? (
+              <a
+                className="inline-flex items-center gap-2 bg-[var(--ink)] px-4 py-3 font-medium text-[var(--paper)] transition hover:opacity-80"
+                href={project.demo}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <ExternalLink aria-hidden="true" className="size-4" />
+                体验项目
+              </a>
+            ) : null}
+          </div>
+        ) : null}
       </header>
       {project.cover ? (
         <figure className="grid gap-3">
@@ -104,7 +102,7 @@ export default async function ProjectPage({ params }: PageProps) {
             sizes="(max-width: 768px) 94vw, 768px"
           />
           {project.coverCaption ? (
-            <figcaption className="text-sm text-[var(--muted)]">
+            <figcaption className="text-[var(--muted)]">
               {project.coverCaption}
             </figcaption>
           ) : null}

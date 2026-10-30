@@ -53,6 +53,15 @@ test("public content honors draft boundaries and editorial project order", () =>
       draft: true,
       tags: ["private"],
     });
+    write("projects", "wine-atlas", {
+      title: "Wine Atlas",
+      date: "2026-10-29",
+    });
+    write("projects", "dungeon-explorer", {
+      title: "Draft exploration",
+      date: "2026-10-29",
+      draft: true,
+    });
     const result = spawnSync(
       process.execPath,
       [
@@ -60,9 +69,9 @@ test("public content honors draft boundaries and editorial project order", () =>
         "--input-type=module",
         "-e",
         `
-      import {getAllArticles,getAllProjects,getFeaturedProjects,getContentBySlug,getAllTags} from ${JSON.stringify(loader)};
+      import {getAllArticles,getAllProjects,getFeaturedProjects,getPortfolioProjects,getContentBySlug,getAllTags} from ${JSON.stringify(loader)};
       console.log(JSON.stringify({articles:getAllArticles(),projects:getAllProjects(),featured:getFeaturedProjects(2).map(p=>p.slug),
-        hidden:getContentBySlug('projects','hidden')??null,tags:getAllTags()}));
+        portfolio:getPortfolioProjects(),hidden:getContentBySlug('projects','hidden')??null,tags:getAllTags()}));
     `,
       ],
       { cwd: root, encoding: "utf8" },
@@ -70,7 +79,16 @@ test("public content honors draft boundaries and editorial project order", () =>
     assert.equal(result.status, 0, result.stderr);
     const data = JSON.parse(result.stdout);
     assert.deepEqual(data.featured, ["focus", "recent"]);
-    assert.equal(data.projects.length, 3);
+    assert.equal(data.projects.length, 4);
+    assert.equal(data.portfolio.lead.slug, "focus");
+    assert.deepEqual(
+      data.portfolio.selected.map((item) => item.slug),
+      ["recent", "unordered"],
+    );
+    assert.deepEqual(
+      data.portfolio.explorations.map((item) => item.slug),
+      ["wine-atlas"],
+    );
     assert.equal(
       data.projects.find((item) => item.slug === "unordered").featuredOrder,
       undefined,

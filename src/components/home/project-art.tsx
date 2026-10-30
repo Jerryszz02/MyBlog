@@ -5,7 +5,11 @@ import styles from "./home.module.css";
 export function ProjectArt({ project }: { project: ContentItem }) {
   if (project.slug === "trainote")
     return (
-      <div className={`${styles.projectArt} ${styles.trainArt}`}>
+      <div
+        className={`${styles.projectArt} ${styles.trainArt}`}
+        role="img"
+        aria-label="Trainote 主题插画：训练与记录，非产品截图"
+      >
         <div className={styles.trainWord} aria-hidden="true">
           Train.
           <br />
@@ -15,40 +19,37 @@ export function ProjectArt({ project }: { project: ContentItem }) {
         </div>
         <div className={styles.phone} aria-hidden="true">
           <span className={styles.island} />
-          <small>TRAINOTE / TODAY</small>
-          <strong>自己的训练节奏</strong>
-          <div className={styles.phoneBlock}>从上次训练继续 →</div>
-          <div className={styles.phoneBlock}>
-            训练记录
-            <div className={styles.bars}>
-              <i />
-              <i />
-              <i />
-              <i />
-              <i />
-            </div>
+          <div className={styles.phoneBlock} />
+          <div className={styles.bars}>
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
           </div>
-          <div className={styles.phoneBlock}>饮食 · 历史 · 回顾</div>
+          <div className={styles.phoneBlock} />
         </div>
-        <span className={styles.artCaption}>结构示意 · 非产品截图</span>
       </div>
     );
-  if (project.slug === "daily-news")
+  if (project.slug === "info-board")
     return (
-      <div className={`${styles.projectArt} ${styles.newsArt}`}>
-        <div className={styles.newsWord} aria-hidden="true">
-          Signal
+      <div
+        className={`${styles.projectArt} ${styles.boardArt}`}
+        role="img"
+        aria-label="InfoBoard 主题插画：个人信息工作台，非产品截图"
+      >
+        <div className={styles.boardWord} aria-hidden="true">
+          Make
           <br />
-          over
+          space
           <br />
-          noise.
+          for ideas.
         </div>
-        <div className={styles.newsLines} aria-hidden="true">
-          <span>Daily News / 多领域中文阅读</span>
-          <span>来源 → 摘要 → 原文</span>
-          <span>沿着线索，继续阅读</span>
+        <div className={styles.boardTiles} aria-hidden="true">
+          <i />
+          <i />
+          <i />
         </div>
-        <span className={styles.artCaption}>信息结构示意</span>
       </div>
     );
   return (
@@ -58,7 +59,7 @@ export function ProjectArt({ project }: { project: ContentItem }) {
           src={project.cover}
           alt={project.coverAlt ?? project.title}
           fill
-          sizes="(max-width: 700px) 90vw, 30vw"
+          sizes="(max-width: 760px) 90vw, 30vw"
         />
       ) : null}
       <div className={styles.pokerWord} aria-hidden="true">
@@ -68,7 +69,6 @@ export function ProjectArt({ project }: { project: ContentItem }) {
         <br />
         MOVE.
       </div>
-      <span className={styles.artCaption}>{project.coverCaption}</span>
     </div>
   );
 }

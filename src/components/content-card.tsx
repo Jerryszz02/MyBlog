@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { ContentItem } from "@/lib/content";
 import { formatDate } from "@/lib/format";
-import { TagPill } from "@/components/tag-pill";
 
 export function ContentCard({ item }: { item: ContentItem }) {
   const href =
@@ -11,31 +10,38 @@ export function ContentCard({ item }: { item: ContentItem }) {
       : `/projects/${item.slug}`;
 
   return (
-    <article className="group grid gap-3 rounded-lg border border-zinc-200 bg-white p-5 transition hover:border-orange-300 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-orange-700">
-      <div className="flex flex-wrap items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-        {item.status ? <span className="text-[var(--link)]">{item.status}</span> : null}
-        <time dateTime={item.date}>{formatDate(item.date)}</time>
-        <span aria-hidden="true">/</span>
-        <span>{item.readingMinutes} 分钟阅读</span>
-      </div>
-      <div className="grid gap-2">
-        <h2 className="text-lg font-semibold tracking-normal text-zinc-950 dark:text-white">
+    <article className="group grid content-start gap-4 border-t border-[var(--line)] py-7">
+      {item.type === "articles" ? (
+        <div className="flex flex-wrap items-center gap-4 text-[var(--muted)]">
+          <time dateTime={item.date}>{formatDate(item.date)}</time>
+          <span>{item.readingMinutes} 分钟阅读</span>
+        </div>
+      ) : null}
+      <div className="grid gap-3">
+        <h2 className="text-2xl font-semibold tracking-normal text-[var(--ink)]">
           <Link className="inline-flex items-center gap-1.5" href={href}>
             {item.title}
             <ArrowUpRight
               aria-hidden="true"
-              className="size-4 text-zinc-400 transition group-hover:text-orange-700 dark:group-hover:text-orange-300"
+              className="size-5 text-[var(--link)] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
           </Link>
         </h2>
-        <p className="line-clamp-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-          {item.description}
-        </p>
+        <p className="leading-8 text-[var(--muted)]">{item.description}</p>
       </div>
-      {item.tags.length > 0 ? (
-        <div className="flex flex-wrap gap-2">
+      {item.type === "projects" && item.status ? (
+        <p className="text-[var(--link)]">{item.status}</p>
+      ) : null}
+      {item.type === "articles" && item.tags.length > 0 ? (
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[var(--muted)]">
           {item.tags.map((tag) => (
-            <TagPill key={tag} tag={tag} />
+            <Link
+              className="underline decoration-[var(--line)] underline-offset-4 hover:text-[var(--link)]"
+              href={`/tags/${encodeURIComponent(tag)}`}
+              key={tag}
+            >
+              {tag}
+            </Link>
           ))}
         </div>
       ) : null}

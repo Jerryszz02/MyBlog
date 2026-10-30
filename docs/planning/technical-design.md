@@ -38,11 +38,11 @@
 
 ### Signal Poster 首页
 
-`src/app/page.tsx` 仍为服务端组件，项目和已发表文章统一取自内容加载器。首页拟写选题是显式维护的公开选题清单，不读取草稿正文。`featuredOrder` 控制人工精选顺序。
+`src/app/page.tsx` 仍为服务端组件，项目统一取自内容加载器。`featuredOrder` 控制精选顺序：Personal Agent、Trainote、InfoBoard、PokerGame；DungeonExplorer 与 Wine Atlas 提供更多探索入口。首页不再读取文章或拟写选题。文章路由与 RSS 仍使用统一加载器过滤草稿。
 
-首页 CSS Module 与共享页头、页脚负责视觉。客户端仅承载动效设置和 Canvas；每帧使用局部变量与预计算几何数据，不触发 React 更新。SSR 提供静态线框与完整正文，减少动态效果、暂停、离屏及隐藏页面均可停止动画，卸载清理监听器和 RAF。
+首页 CSS Module 与共享页头、页脚负责视觉。导航集中展示作品、关于和主题切换，文章与 RSS 入口保留在页脚。客户端仅承载动效设置和 Canvas，装置仅保留暂停开关；每帧使用局部变量与预计算几何数据，不触发 React 更新。SSR 提供静态线框与完整正文，减少动态效果、暂停、离屏及隐藏页面均可停止动画，卸载清理监听器和 RAF。
 
-本地截图使用 Next.js Image 提供尺寸与响应式加载，不引入动画库、字体服务、CMS 或追踪。
+本地截图使用 Next.js Image 提供尺寸与响应式加载，示意图和示例截图保留性质说明。项目内页使用共享品牌变量、普通技术标签链接和可读正文；项目卡片不显示文章阅读时间，文章卡片保留日期与阅读时间。本次不新增内容字段或依赖。
 
 1. 作者在 `content/articles` 或 `content/projects` 添加或修改 `.mdx` 文件。
 2. `src/lib/content.ts` 读取对应目录，把文件名转换为 slug。
