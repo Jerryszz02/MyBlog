@@ -3,24 +3,21 @@ import { ContentCard } from "@/components/content-card";
 import { compareProjects, getAllProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "项目",
-  description: "个人项目、作品集和技术实践展示。",
+  title: "作品",
+  description: "AI 应用、全栈工具、iOS 应用与游戏的工程实践。",
 };
 
 export default function ProjectsPage() {
   const projects = getAllProjects().sort(compareProjects);
 
   return (
-    <section className="mx-auto grid max-w-5xl gap-8 px-5 py-12">
-      <div className="grid gap-3">
-        <p className="text-sm font-semibold text-[var(--link)]">
-          Projects
-        </p>
-        <h1 className="text-3xl font-semibold tracking-normal text-zinc-950 dark:text-white">
-          项目
+    <section className="mx-auto grid max-w-5xl gap-10 px-5 py-16">
+      <div className="grid gap-4">
+        <h1 className="text-4xl font-semibold tracking-normal text-[var(--ink)]">
+          作品
         </h1>
-        <p className="max-w-2xl text-zinc-600 dark:text-zinc-400">
-          这里展示个人作品、技术栈、实现背景和可继续展开的项目复盘。
+        <p className="max-w-2xl text-lg leading-8 text-[var(--muted)]">
+          从 AI 应用到全栈工具，记录解决的问题、关键实现与当前进展。
         </p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">

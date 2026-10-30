@@ -1,32 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createAgentKnot } from "@/lib/agent-geometry";
 import { useHomeMotion } from "./home-motion";
 import styles from "./home.module.css";
 
 const knot = createAgentKnot();
-const concepts = [
-  {
-    label: "对话",
-    description: "从一个问题开始，逐步组织上下文。",
-    pitch: 0.65,
-  },
-  {
-    label: "记忆",
-    description: "保留有来源的背景，供后续任务参考。",
-    pitch: 1.15,
-  },
-  {
-    label: "执行",
-    description: "推进任务，并留下可以检查的结果。",
-    pitch: 0.2,
-  },
-];
-
 export function AgentSculpture({ fallback }: { fallback: React.ReactNode }) {
   const { paused, reduced, toggle } = useHomeMotion();
-  const [mode, setMode] = useState(0);
   const sceneRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const phaseRef = useRef(0.35);
@@ -56,7 +37,7 @@ export function AgentSculpture({ fallback }: { fallback: React.ReactNode }) {
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
       context.clearRect(0, 0, width, height);
       const yaw = phaseRef.current + eased.x * 0.3,
-        pitch = concepts[mode].pitch + eased.y * 0.22;
+        pitch = 0.65 + eased.y * 0.22;
       const sp = Math.sin(pitch),
         cp = Math.cos(pitch),
         sy = Math.sin(yaw),
@@ -139,7 +120,7 @@ export function AgentSculpture({ fallback }: { fallback: React.ReactNode }) {
       document.removeEventListener("visibilitychange", sync);
       delete scene.dataset.ready;
     };
-  }, [mode, paused]);
+  }, [paused]);
 
   return (
     <div className={styles.sculpture}>
@@ -147,43 +128,16 @@ export function AgentSculpture({ fallback }: { fallback: React.ReactNode }) {
         <div className={styles.fallback}>{fallback}</div>
         <canvas className={styles.canvas} ref={canvasRef} />
       </div>
-      <div className={styles.conceptPanel}>
-        <div className={styles.panelTop}>
-          <span>
-            概念交互{" "}
-            <span className={styles.pointerHint}>/ 移动指针，切换主题</span>
-          </span>
-          <button
-            type="button"
-            className={styles.motionToggle}
-            onClick={toggle}
-            disabled={reduced}
-            aria-pressed={!paused}
-            aria-label="开关页面动效"
-          >
-            {reduced ? "静态模式" : paused ? "▷ 开启动效" : "Ⅱ 暂停动效"}
-          </button>
-        </div>
-        <div
-          className={styles.modeButtons}
-          role="group"
-          aria-label="线框概念主题"
-        >
-          {concepts.map((concept, index) => (
-            <button
-              type="button"
-              aria-pressed={index === mode}
-              onClick={() => setMode(index)}
-              key={concept.label}
-            >
-              {concept.label}
-            </button>
-          ))}
-        </div>
-        <p className={styles.conceptCopy} aria-live="polite">
-          {concepts[mode].label}：{concepts[mode].description}
-        </p>
-      </div>
+      <button
+        type="button"
+        className={styles.motionToggle}
+        onClick={toggle}
+        disabled={reduced}
+        aria-pressed={!paused}
+        aria-label="开关页面动效"
+      >
+        {reduced ? "静态模式" : paused ? "开启动效" : "暂停动效"}
+      </button>
     </div>
   );
 }

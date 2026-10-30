@@ -1,13 +1,13 @@
 export const siteConfig = {
   name: "Jerryszz",
-  title: "Jerryszz | 作品与手记",
-  description: "正在构建自己的 Personal Agent，也记录应用、游戏和 AI 工具的开发过程。",
+  title: "Jerryszz | 软件工程与 AI 应用",
+  description:
+    "Jerryszz 的个人作品集：全栈开发、AI 应用、iOS 与游戏，从交互、数据到可靠执行。",
   author: "Jerryszz",
   url: "https://myblog-lac-tau-25.vercel.app",
   locale: "zh-CN",
   nav: [
     { href: "/projects", label: "作品" },
-    { href: "/articles", label: "手记" },
     { href: "/about", label: "关于" },
   ],
   social: {

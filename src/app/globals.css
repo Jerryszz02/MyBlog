@@ -194,15 +194,10 @@ body {
   display: flex;
   align-items: center;
   gap: 2rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 .site-nav a {
   padding: 0.8em 0.1em;
-}
-.site-nav a::before {
-  content: "/";
-  color: var(--link);
-  margin-right: 0.25em;
 }
 .site-header-actions {
   display: flex;
@@ -210,9 +205,7 @@ body {
   align-items: center;
 }
 .site-github {
-  font:
-    0.72rem Menlo,
-    monospace;
+  font-size: 1rem;
 }
 .theme-toggle {
   display: inline-flex;
@@ -237,7 +230,7 @@ body {
   justify-content: space-between;
   gap: 1.5rem;
   border-top: 1px solid var(--line);
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 .site-footer-links {
   display: flex;
@@ -284,10 +277,7 @@ summary:focus-visible {
   }
   .site-nav {
     gap: 0.8rem;
-    font-size: 0.75rem;
-  }
-  .site-nav a::before {
-    display: none;
+    font-size: 1rem;
   }
   .site-github {
     display: none;
@@ -300,7 +290,7 @@ summary:focus-visible {
     height: 2.75rem;
   }
   .site-footer-inner {
-    font-size: 0.68rem;
+    font-size: 1rem;
     line-height: 1.8;
     flex-wrap: wrap;
   }
@@ -315,7 +305,7 @@ summary:focus-visible {
   }
   .site-nav {
     gap: 0.55rem;
-    font-size: 0.72rem;
+    font-size: 1rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -33,7 +33,7 @@ export function SiteHeader() {
             target="_blank"
             rel="noreferrer"
           >
-            GITHUB ↗
+            GitHub ↗
           </a>
           <ThemeToggle />
         </div>

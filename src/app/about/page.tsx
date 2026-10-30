@@ -3,72 +3,44 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "关于",
-  description: "关于作者、关注方向和联系方式。",
+  description: "软件工程、全栈开发与 AI 应用实践。",
 };
 
 export default function AboutPage() {
   return (
-    <section className="mx-auto grid max-w-3xl gap-8 px-5 py-12">
-      <div className="grid gap-3">
-        <p className="text-sm font-semibold text-[var(--link)]">
-          About
-        </p>
-        <h1 className="text-3xl font-semibold tracking-normal text-zinc-950 dark:text-white">
+    <section className="mx-auto grid max-w-3xl gap-8 px-5 py-16">
+      <div className="grid gap-6">
+        <h1 className="text-4xl font-semibold tracking-normal text-[var(--ink)]">
           关于 {siteConfig.name}
         </h1>
-        <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-          我正在构建自己的 Personal Agent，也做应用、游戏和信息工具。
-          这里收集我的作品，以及它们背后的选择、问题和开发过程。
+        <p className="text-lg leading-8 text-[var(--muted)]">
+          我关注软件工程与全栈开发，尤其是把 AI 能力接入实际工作流程。 从
+          Personal Agent 的任务恢复与结果验收，到 InfoBoard
+          的前端、服务和数据存储，
+          我希望做出的工具既能解决具体问题，也能持续维护。
+        </p>
+        <p className="text-lg leading-8 text-[var(--muted)]">
+          我也在开发离线优先的 iPhone 应用 Trainote，并已发布扑克游戏
+          PokerGame。 这里收集这些项目的关键实现、工程取舍和当前进展。
         </p>
       </div>
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <section className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-white">
-            关注方向
-          </h2>
-          <ul className="mt-4 grid gap-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            <li>Personal Agent：对话、记忆与可靠执行</li>
-            <li>个人应用、独立游戏与信息工具</li>
-            <li>把具体的开发经验整理成手记</li>
-          </ul>
-        </section>
-        <section className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-white">
-            联系方式
-          </h2>
-          <dl className="mt-4 grid gap-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            <div>
-              <dt className="font-medium text-zinc-950 dark:text-white">
-                作者
-              </dt>
-              <dd>{siteConfig.author}</dd>
-            </div>
-            <div>
-              <dt className="font-medium text-zinc-950 dark:text-white">
-                GitHub
-              </dt>
-              <dd>
-                <a
-                  className="break-all text-[var(--link)] underline underline-offset-4"
-                  href={siteConfig.social.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {siteConfig.social.github}
-                </a>
-              </dd>
-            </div>
-            {siteConfig.social.email ? (
-              <div>
-                <dt className="font-medium text-zinc-950 dark:text-white">
-                  Email
-                </dt>
-                <dd>{siteConfig.social.email}</dd>
-              </div>
-            ) : null}
-          </dl>
-        </section>
+      <div className="flex flex-wrap gap-6 border-t border-[var(--line)] pt-6 text-[var(--link)]">
+        <a
+          className="underline underline-offset-4"
+          href={siteConfig.social.github}
+          target="_blank"
+          rel="noreferrer"
+        >
+          在 GitHub 找到我 ↗
+        </a>
+        {siteConfig.social.email ? (
+          <a
+            className="underline underline-offset-4"
+            href={`mailto:${siteConfig.social.email}`}
+          >
+            {siteConfig.social.email}
+          </a>
+        ) : null}
       </div>
     </section>
   );

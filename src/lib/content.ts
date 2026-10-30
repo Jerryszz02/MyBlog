@@ -159,6 +159,22 @@ export function getFeaturedProjects(limit = 3) {
     .slice(0, limit);
 }
 
+export function getPortfolioProjects() {
+  const projects = getAllProjects().sort(compareProjects);
+  const featured = projects.filter((project) => project.featured).slice(0, 4);
+  const selectedSlugs = new Set(featured.map((project) => project.slug));
+
+  return {
+    lead: featured[0],
+    selected: featured.slice(1),
+    explorations: projects.filter(
+      (project) =>
+        !selectedSlugs.has(project.slug) &&
+        ["dungeon-explorer", "wine-atlas"].includes(project.slug),
+    ),
+  };
+}
+
 export function compareProjects(a: ContentItem, b: ContentItem) {
   if (a.featured !== b.featured) return a.featured ? -1 : 1;
   if (a.featured && b.featured) {

@@ -6,7 +6,7 @@
 
 ## 适用范围
 
-适用于 `/Users/jerryszz/Desktop/Projects/MyBlog` 中使用 Next.js、TypeScript、Tailwind CSS、本地 MDX 和 RSS 的个人技术作品集博客。2026-10-11 已核验 Vercel Git 集成与生产域名 `https://myblog-lac-tau-25.vercel.app`。
+适用于 `/Users/jerryszz/Desktop/Projects/MyBlog` 中使用 Next.js、TypeScript、Tailwind CSS、本地 MDX 和 RSS 的个人技术作品集博客。本次 2026-10-29 更新沿用 2026-10-11 核验的 Vercel Git 集成与生产域名 `https://myblog-lac-tau-25.vercel.app`。
 
 ## Plan 或项目证据
 
@@ -30,21 +30,21 @@
 
 | 场景 | 预期结果 |
 | --- | --- |
-| 访问 `/` | 与 `DESIGN.md` 第三版方向一致；Personal Agent 主推，其后为 PokerGame、Trainote、Daily News |
-| 访问 `/articles` | 只展示非草稿文章，按日期倒序；无公开文章时有明确空状态和选题入口 |
+| 访问 `/` | 保留 `DESIGN.md` 的橙黑、倾斜大字与线框风格；个人介绍后按 Personal Agent、Trainote、InfoBoard、PokerGame 展示精选作品 |
+| 访问 `/articles` | 只展示非草稿文章，按日期倒序；无公开文章时有明确空状态和作品入口 |
 | 访问 `/articles/[slug]` | 展示文章详情、标签、阅读时长和 MDX 正文 |
-| 访问 `/projects` | 展示八个公开项目；精选项目按 `featuredOrder` 优先，不展示原示例草稿 |
-| 访问 `/projects/[slug]` | 展示项目详情、可选项目链接和 MDX 正文 |
+| 访问 `/projects` | 展示十个公开项目；精选项目按 `featuredOrder` 优先，不展示原示例草稿 |
+| 访问 `/projects/[slug]` | 展示项目标题、摘要、当前阶段、技术标签链接、可选项目链接和 MDX 正文；不显示项目阅读时长或精选标记 |
 | 访问 `/about` | 展示当前关注方向和 GitHub 入口，无虚构身份或邮箱 |
 | 访问 `/tags/[tag]` | 展示该标签下的文章和项目 |
 | 访问 `/rss.xml` | 返回包含非草稿文章的 RSS XML |
 | HTML RSS 入口和订阅链接 | 首页 alternate、RSS channel 和 self 链接指向 `siteConfig.url`，不得残留 `example.com` |
 | 切换主题 | light、dark、system 可切换，刷新后保持预期状态 |
 | 移动端浏览 | 文本、卡片、导航和按钮不重叠、不溢出 |
-| 更多项目与拟写选题 | 原生 details 可展开；选题标为尚未发表，提纲不是草稿正文 |
-| 装置交互 | 对话、记忆、执行切换状态和说明；线框随模式变化 |
-| 动效开关与系统设置 | 暂停时线框和装饰动画停止；减少动态效果时静止、开关禁用；装置离屏或页面隐藏时停止连续绘制 |
-| 禁用 JavaScript | 正文、项目入口、选题提纲及静态 SVG 仍存在 |
+| 更多探索与入口 | DungeonExplorer、Wine Atlas 直接可见且详情可访问；全部作品、GitHub、关于和页脚手记/RSS 入口有效，无已删除区块的失效锚点 |
+| 页面精简 | 首页无滚动标语、装置概念模式按钮、拟写选题、下一阶段计划和底部装饰大字；不以细小装饰文字重复标题 |
+| 动效开关与系统设置 | 暂停时线框和入场动画停止；减少动态效果时静止、开关禁用；装置离屏或页面隐藏时停止连续绘制 |
+| 禁用 JavaScript | 个人介绍、项目入口及静态 SVG 仍存在 |
 | 图片与对比度 | 截图有性质说明、无拉伸；大字对比度至少 3:1，普通文字至少 4.5:1；使用响应式图片 |
 
 ## 回归场景
